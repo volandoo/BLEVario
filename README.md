@@ -12,7 +12,7 @@ Once shut down it will wake up again when the button is pressed. The battery wil
 
 - Lolin32 Lite (ESP32 Chip with battery charger)
 
-<img src="/images/lolin32.jpg" width="200">
+  <img src="/images/lolin32.jpg" width="200">
 
 - MS5611 Barometer
 
