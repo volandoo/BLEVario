@@ -1,5 +1,3 @@
-#ifdef VARIO_BLE
-
 /*
 ms5611.h
 Library for barometric pressure sensor MS5611-01BA on I2C with arduino
@@ -42,7 +40,5 @@ private:
     uint16_t m_C[N_PROM_PARAMS];
     uint32_t m_lastTime;
 };
-
-#endif
 
 #endif

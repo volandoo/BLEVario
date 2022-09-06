@@ -1,5 +1,3 @@
-#ifdef VARIO_BLE
-
 #include "BLEController.h"
 
 #include <BLE2902.h>
@@ -144,5 +142,3 @@ void BLEController::sendMessage(String &message)
 	txCharacteristic->notify();
 	delay(5);
 }
-
-#endif

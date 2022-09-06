@@ -11,16 +11,20 @@ Once shut down it will wake up again when the button is pressed. The battery wil
 #### Requirements:
 
 - Lolin32 Lite (ESP32 Chip with battery charger)
-  ![Lolin32 Lite](/images/lolin32.jpg)
+
+<img src="/images/lolin32.jpg" width="200">
 
 - MS5611 Barometer
-  ![MS5611](/images/ms5611.jpg)
+
+  <img src="/images/ms5611.jpg" width="200">
 
 - Lipo Battery
-  ![Battery](/images/battery.jpg)
+
+  <img src="/images/battery.jpg" width="200">
 
 - Button
-  ![Button](/images/button.jpg)
+
+  <img src="/images/button.jpg" width="200">
 
 #### Instructions:
 

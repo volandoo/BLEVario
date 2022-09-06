@@ -1,5 +1,3 @@
-#ifdef VARIO_BLE
-
 #ifndef BLE_CONTROLLER_
 #define BLE_CONTROLLER_
 
@@ -27,6 +25,4 @@ private:
 	BLECharacteristic *rxCharacteristic = NULL;
 	BLECharacteristic *txCharacteristic = NULL;
 };
-#endif
-
 #endif

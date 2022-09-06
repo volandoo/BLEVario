@@ -1,5 +1,3 @@
-#ifdef VARIO_BLE
-
 /*
 MS5611.h
 Library for barometric pressure sensor MS5611-01BA on I2C with arduino
@@ -151,5 +149,3 @@ void MS5611::reset()
     Wire.write(CMD_RESET);
     Wire.endTransmission();
 }
-
-#endif
