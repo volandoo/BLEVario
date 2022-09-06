@@ -1,6 +1,3 @@
-#include "include.h"
-
-#ifdef VARIO_BLE
 #include <Arduino.h>
 
 #include <MS5611.h>
@@ -55,7 +52,7 @@ void setup()
   delay(1000);
   print_wakeup_reason();
   Serial.println("Starting Device...");
-  // ms5611.begin(-1, -1);
+
   ms5611.begin(19, 23);
   bleController.start("Volandoo");
   Serial.println("Starting BLE work!");
@@ -105,4 +102,3 @@ void loop()
   }
   delay(2000);
 }
-#endif
