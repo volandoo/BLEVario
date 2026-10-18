@@ -6,6 +6,7 @@
 #include <BLEUtils.h>
 
 #include <stdlib.h>
+#include <stdio.h>
 
 class ServerCallbacks : public BLEServerCallbacks
 {
@@ -137,7 +138,9 @@ void BLEController::sendMessage(String &message)
 		bi = (unsigned char)message[ai];
 		checksum ^= bi;
 	}
-	message = '$' + message + '*' + String(checksum, HEX) + "\r\n";
+	char checksumHex[3];
+	snprintf(checksumHex, sizeof(checksumHex), "%02X", checksum);
+	message = '$' + message + '*' + checksumHex + "\r\n";
 	txCharacteristic->setValue(message.c_str());
 	txCharacteristic->notify();
 	delay(5);

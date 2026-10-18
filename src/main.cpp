@@ -3,6 +3,7 @@
 #include <MS5611.h>
 #include <Altimeter.h>
 #include "BLEController.h"
+#include "SampleTimer.h"
 #include <driver/rtc_io.h>
 
 MS5611 ms5611;
@@ -58,21 +59,18 @@ void setup()
   Serial.println("Starting BLE work!");
 }
 
-static double prevTime = 0;
+static SampleTimer sampleTimer;
 static int cycles = 0;
 void loop()
 {
   if (bleController.deviceConnected)
   {
-    auto now = millis();
-    auto time = 1 / (now - prevTime);
-    if (prevTime == 0)
-    {
-      time = 0;
-    }
-    prevTime = now;
-
     auto pressure = ms5611.getPressure();
+    const double time = sampleTimer.elapsedSeconds(millis());
+    if (time == 0)
+    {
+      return; // No elapsed time: wait for the next sample.
+    }
     altimeter.addPressure(pressure, time);
 
     auto varioVal = altimeter.varioValue();
@@ -93,7 +91,7 @@ void loop()
     bleController.sendMessage(start + "," + pres + "," + alt + "," + vario + "," + temp + "," + battery);
     return;
   }
-  prevTime = 0;
+  sampleTimer.reset();
   cycles++;
   if (cycles > 3)
   {

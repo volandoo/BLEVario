@@ -45,13 +45,15 @@ void MS5611::begin(int sda, int scl)
     {
         Wire.beginTransmission(ADD_MS5611);
         error = Wire.endTransmission();
-        Serial.println("error " + String(error));
+        if (error != 0)
+            Serial.println("MS5611 I2C probe failed: " + String(error));
         delay(1000);
     }
     reset();
 
     delay(100);
     readCalibration();
+    Serial.println("MS5611 calibration read complete");
 }
 
 int32_t MS5611::getPressure()
@@ -125,19 +127,18 @@ void MS5611::sendCommand(uint8_t cmd)
 
 uint32_t MS5611::readnBytes(uint8_t nBytes)
 {
-    if (0 < nBytes & nBytes < 5)
+    if (0 < nBytes && nBytes < 5)
     {
-        Wire.beginTransmission(ADD_MS5611);
+        // requestFrom performs the read transaction itself. Wrapping it in
+        // beginTransmission holds the ESP32 Wire lock and deadlocks the read.
         Wire.requestFrom((uint8_t)ADD_MS5611, nBytes);
         uint32_t data = 0;
         if (Wire.available() != nBytes)
         {
-            Wire.endTransmission();
             return 0.0;
         }
         for (int8_t k = nBytes - 1; k >= 0; k--)
             data |= ((uint32_t)Wire.read() << (8 * k)); // concantenate bytes
-        Wire.endTransmission();
         return data;
     }           // too many bytes or
     return 0.0; // no byte required
