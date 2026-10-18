@@ -55,7 +55,7 @@ void setup()
   Serial.println("Starting Device...");
 
   ms5611.begin(19, 23);
-  bleController.start("Volandoo");
+  bleController.start("VOLVario");
   Serial.println("Starting BLE work!");
 }
 
